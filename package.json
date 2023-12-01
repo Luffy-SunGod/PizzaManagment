@@ -2,15 +2,20 @@
   "name": "pizzaproject",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon src/index.js"
+    "start": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^3.0.1"
+    "dotenv": "^16.3.1",
+    "epress": "^0.0.1-security",
+    "mongoose": "^8.0.2",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.1.0"
   }
 }
