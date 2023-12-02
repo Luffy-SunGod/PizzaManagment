@@ -1,4 +1,4 @@
-import mongoose,{Schema, mongo} from "mongoose";
+import mongoose,{Schema} from "mongoose";
 import bcrypt from "bcrypt";
 import { createTokenForUser } from "../utils/authentication.js";
 
@@ -12,7 +12,6 @@ const userSchema=new Schema({
         type:String,
         required:true,
         unique:true,
-       
     },
     password:{
         type:String,
@@ -21,6 +20,9 @@ const userSchema=new Schema({
     adress:{
         type:String,
         lowercase:true
+    },
+    token:{
+        type:String
     }
 
 },{timestamps:true});

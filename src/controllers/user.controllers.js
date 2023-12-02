@@ -7,7 +7,7 @@ const handleSingin=async (req,res)=>{
         const flag=await user.isPasswordCorrect(password);
         if(!flag)res.status(401).json({msg:"password incorrect try again!!"});
         const token=await user.createToken();
-        console.log("token",token);
+        await User.updateOne({_id:user._id},{$set:{token:token}})
         res.cookie("token",token).json({msg:"success"})
     }catch(error){ 
         console.log(error);
@@ -19,7 +19,7 @@ const handleSingin=async (req,res)=>{
 }
 
 const handleSignup=async(req,res)=>{
-    console.log("req body: ",req.body)
+    // console.log("req body: ",req.body)
     try {
         const {Name,email,password,adress}=req.body
         const user=User.create({
@@ -34,6 +34,11 @@ const handleSignup=async(req,res)=>{
         res.status(402).json({msg:"Plzz give all data",error});
     }
 }
+
+
+// const orderPizza=async((req,res,next)=>{
+
+// })
 
 export {handleSingin,handleSignup}
 

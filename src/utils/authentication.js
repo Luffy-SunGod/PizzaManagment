@@ -16,9 +16,7 @@ async function createTokenForUser(user){
     )
 }
 
-async function verifyToken(token){
-    return jwt.verify(token,process.env.TOKEN_SALT);
-}
 
-export {createTokenForUser,verifyToken}
+
+export {createTokenForUser}
 
