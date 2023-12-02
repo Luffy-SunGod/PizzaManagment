@@ -9,7 +9,6 @@ const orderSchema=new Schema({
     },
     description:{
         type:String,
-
     },
     price:{
         type:Number,
@@ -24,6 +23,15 @@ const orderSchema=new Schema({
     adress:{
         type:String,
         required:true
+    },
+    quantity:{
+        type:number,
+        default:1
+    },
+    status:{
+        type:String,
+        enum:["PENDING","DELIVERED"],
+        default:"PENDING"
     }
 },{timestamps:true})
 
