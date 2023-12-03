@@ -26,6 +26,7 @@ Building a Comprehensive Pizza Delivery System with User Management
 ```http
   POST /api/user/signup
   ->user can Register using this api
+  -> Password is being encrypted by bcrypt for security reasons
 ```
 
 ### Place Orders
