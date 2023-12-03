@@ -8,10 +8,10 @@ const checkForAuthentication=((req,res,next)=>{
         if(token){
             next();
         }else {
-            return res.json({msg:"user not verified"})
+            return res.status(403).json({msg:"user not verified"})
         }
     }else{
-        res.json({msg:"operation not allowed"})
+        res.status(405).json({msg:"operation not allowed plz login!!!"})
     }
 })
 

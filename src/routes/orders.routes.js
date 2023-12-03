@@ -6,7 +6,7 @@ const router=Router();
 router.post("/orders",handlePlaceOrders)
 router.get("/orders",handleGetOrders)
 router.get("/orders/:id",handleGetOrderById)
-router.put("/orders:id",updateOrder)
-router.delete("/order:id",deleteOrder);
+router.put("/orders/:id",updateOrder)
+router.delete("/orders/:id",deleteOrder);
 
 export default router;

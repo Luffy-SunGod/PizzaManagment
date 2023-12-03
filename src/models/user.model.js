@@ -19,7 +19,8 @@ const userSchema=new Schema({
     },
     adress:{
         type:String,
-        lowercase:true
+        lowercase:true,
+        required:true
     },
     token:{
         type:String
