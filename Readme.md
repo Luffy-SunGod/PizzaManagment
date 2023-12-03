@@ -50,6 +50,7 @@ Building a Comprehensive Pizza Delivery System with User Management
 ```http
   PUT api/user/orders/:id
    user can get specific order(only accessible to logged-in users).
+   To update an order you have to give particular field in Body while requesting
 ```
 
 ### Delete Order by id
