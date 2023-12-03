@@ -16,11 +16,13 @@ app.use(cookieParser())
 //Routes Import
 import userRouter from "./routes/user.routes.js"
 import orderRoute from "./routes/orders.routes.js"
+import getPizzaRoute from "./routes/pizza.routes.js"
 
 //routes
 
 app.use("/api/user",userRouter)
 app.use("/api/user",checkForAuthentication,orderRoute);
+app.use("/api",getPizzaRoute);
 
 
 export {app}

@@ -19,7 +19,6 @@ const handleSingin=async (req,res)=>{
 }
 
 const handleSignup=async(req,res)=>{
-    // console.log("req body: ",req.body)
     try {
         const {Name,email,password,adress}=req.body
         const user=User.create({

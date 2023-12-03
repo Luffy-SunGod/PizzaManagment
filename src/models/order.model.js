@@ -25,7 +25,7 @@ const orderSchema=new Schema({
         required:true
     },
     quantity:{
-        type:number,
+        type:Number,
         default:1
     },
     status:{
