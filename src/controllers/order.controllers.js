@@ -54,11 +54,10 @@ const updateOrder=async(req,res)=>{
     const id=req.params.orderId;
     try {
         const data=await Order.findById(id);
-        console.log(data);
         const result =await Order.findByIdAndUpdate(id,{$set:{
-            adress:data.adress||req.body.adress,
-            Pizza_Type:data.Pizza_Type||req.body.Pizza_Type,
-            quantity:data.quantity||req.body.quantity
+            adress:req.body.adress||data.adress,
+            Pizza_Type:req.body.Pizza_Type||data.Pizza_Type,
+            quantity:req.body.quantity||data.quantity 
         }})
         res.status(201).json({msg:"order updated sucessfully!!",data:result});
     } catch (error) {
