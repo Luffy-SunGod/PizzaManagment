@@ -6,10 +6,21 @@ const handlePlaceOrders=async(req,res)=>{
     const token=req.cookies.token;
     const new_order=req.body;
     try{
-        const data=await User.find({token:token}).populate('orders');
-        for(let o of new_order)data.orders.push(o);
-        await data.save()
-        res.status(200).json({msg:"order successful",data:data.orders})
+        const orders=await Order.insertMany(new_order);
+        const data=await User.find({token:token});
+        console.log(data[0].orders)
+        data[0].orders=[];
+
+        for(let o of orders){
+            data[0].orders.push(o._id);     
+        }
+        console.log(data[0].orders);
+        
+        const res=await User.findOneAndUpdate({token},{$set:{
+            orders:data[0].orders,
+        }})
+        
+        res.status(200).json({msg:"order successful",data:res})
     }catch (error) {
         console.log(error);
         res.status(403).json({msg:"error in taking order"})
@@ -19,29 +30,25 @@ const handlePlaceOrders=async(req,res)=>{
 const handleGetOrders=async(req,res)=>{
     try {
         const token=req.cookies.token;
-        const user = await User.findOne({ token }).populate('orders');
-        if(!user)res.status(405).json({msg:"Plzz login first to get orders"});
-        const data=user.orders;
-        console.log(data);
+        const data=await User.findOne({ token }).populate('orders');
+        // if(!data)res.status(405).json({msg:"Plzz login first to get orders"});
+        // const order=Order.find
         res.status(200).json({msg:"success1",data:data});
     } catch(error){
         console.log(error);
-        res.status(405).json({msg:"invalid user"})
+        res.status(405).json({msg:"invalid user",})
     }
 }
 
 const handleGetOrderById=async(req,res)=>{
     try {
-        
+        const id=req.params.id;
         const token=req.cookies.token;
-        const orderId = req.params.orderId;  
-
-        const data=await User.find({token:token});
-        if(!data)res.status(405).json({msg:"Plzz login first to get orders"});
-        const orders=data.orders;
-        
-        if(!order)res.status(400).json({msg:"order doesnt exist"})
-        res.status(200).json({msg:"success",data:order});
+        const data=await User.findOne({ token }).populate('orders');
+        console.log(data);
+        const or=data.orders.filter((o1)=>o1._id===id)
+        console.log(or);
+        res.status(200).json({msg:"success",data:or});
     } catch (error) {
         console.log(error);
         res.status(405).json({msg:"invalid request"})

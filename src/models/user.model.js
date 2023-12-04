@@ -32,7 +32,7 @@ const userSchema=new Schema({
         type:String
     },
     orders:{
-        type:[orderSchema],
+        type:[mongoose.Schema.Types.ObjectId],
         ref:'Order',
         default:[]
     }
