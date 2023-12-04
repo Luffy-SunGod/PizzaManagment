@@ -31,10 +31,8 @@ const handleGetOrders=async(req,res)=>{
     try {
         const token=req.cookies.token;
         const data=await User.findOne({ token }).populate('orders');
-        // if(!data)res.status(405).json({msg:"Plzz login first to get orders"});
-        // const order=Order.find
-        res.status(200).json({msg:"success1",data:data});
-    } catch(error){
+        res.status(200).json({msg:"success1",data:data.orders});
+    }catch(error){
         console.log(error);
         res.status(405).json({msg:"invalid user",})
     }
@@ -42,13 +40,13 @@ const handleGetOrders=async(req,res)=>{
 
 const handleGetOrderById=async(req,res)=>{
     try {
-        const id=req.params.id;
+        const id=""+req.params.orderId;
+        console.log(id);
         const token=req.cookies.token;
         const data=await User.findOne({ token }).populate('orders');
-        console.log(data);
-        const or=data.orders.filter((o1)=>o1._id===id)
-        console.log(or);
-        res.status(200).json({msg:"success",data:or});
+        const result=data.orders.filter((o1)=>(o1._id.toString()===id))
+            console.log(result);
+        res.status(200).json({msg:"success",data:result});
     } catch (error) {
         console.log(error);
         res.status(405).json({msg:"invalid request"})
