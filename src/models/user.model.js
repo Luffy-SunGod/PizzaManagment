@@ -1,6 +1,12 @@
 import mongoose,{Schema} from "mongoose";
 import bcrypt from "bcrypt";
 import { createTokenForUser } from "../utils/authentication.js";
+import { orderSchema } from "./order.model.js";
+// const orderSchema=new Schema({
+//     orderId:{
+
+//     }
+// })
 
 
 const userSchema=new Schema({
@@ -24,6 +30,11 @@ const userSchema=new Schema({
     },
     token:{
         type:String
+    },
+    orders:{
+        type:[orderSchema],
+        ref:'Order',
+        default:[]
     }
 
 },{timestamps:true});
